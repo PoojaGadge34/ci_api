@@ -16,8 +16,6 @@ class Product extends REST_Controller {
 	}
     public function addproduct_post()
     {
-        // echo "heelo";
-        // die();
         try
         {
             $data = json_decode(file_get_contents('php://input'), TRUE);
@@ -72,8 +70,6 @@ class Product extends REST_Controller {
 
     public function updateproduct_put()
     {
-        // echo "heelo";
-        // die();
         try
         {
             $data = json_decode(file_get_contents('php://input'), TRUE);
@@ -82,7 +78,7 @@ class Product extends REST_Controller {
             if($Product_Updated)
             {
                 $response = array(
-                    "statuscode" => 1, //Success
+                    "statuscode" => 1,
                     "message"  => "Doctor data updated successfully",
                     "data" => $data
                 );
@@ -91,7 +87,7 @@ class Product extends REST_Controller {
             else
             {
                 $response = array(
-                    "statuscode" => 0, //Failed
+                    "statuscode" => 0, 
                     "message"  => "Something went wrong while updating doctor data",
                     "data" => $data
                 );
@@ -189,46 +185,5 @@ class Product extends REST_Controller {
             throw new Exception($e->getMessage());
         }
     }
-    public function addtocart_get()
-    {
-        // try
-        // {
-        //     $ProductId = $this->input->get('id');
-        //     $ProductName = $this->input->get('name'); 
-        //     $ProductDescription = $this->input->get('description'); 
-        //     $Productprice = $this->input->get('price'); 
-        //     $ProductQuantity = $this->input->get('quantity'); 
-
-        //     $ProductData = $this->Product_model->addtocart($ProductId,$Productprice,$ProductQuantity);            
-
-        //     if(!empty($ProductData))
-        //     {
-        //         $response = array("status" => 1,
-        //                             "message"=>"Product data sent intpo cart successfully",
-        //                             "data"=>$ProductData);
-        //         $this->response($response, REST_Controller::HTTP_OK);
-        //     }
-        //     else 
-        //     {
-        //         $response = array("status"=>0,
-        //                             "message"=>"No data available",
-        //                             "data"=>null);
-        //         $this->response($response,REST_Controller::HTTP_OK);
-        //     }
-        // }
-        // catch (Exception $e) 
-        // { 
-        //     throw new Exception($e->getMessage());
-        // }
-
-        $product = $this->product->getrows('id');
-
-        $data = array('id'=>$product['id'],
-                      'quantity'=>1,
-                      'price'=>$product['price'],
-                       'name'=>$product['name']);
-
-        $this->cart->insert($data);
-        redirect('/controller/Cart');
-    }
+    
 }
