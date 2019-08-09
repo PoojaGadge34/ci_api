@@ -21,8 +21,7 @@ class Product extends REST_Controller {
         try
         {
             $data = json_decode(file_get_contents('php://input'), TRUE);
-            // print_r($data);
-            // die();
+    
            
 
             if(trim($data['name']) != "")
